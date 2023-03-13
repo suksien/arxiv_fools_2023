@@ -1,11 +1,16 @@
 Submit between Mar 29 (Wed) 1400 - Mar 30 (Thurs) 1400 (EST)
 
+=============
 Paper title: needs to be cheeky, can ask GPT to generate one maybe
 
+=============
 Working abstract:
-Publications, and the ensuing citations, are currency for academics. As such, we try every possible ways to attract people to our papers admist the deluge of 60+ papers that appear on the arxiv each day. One popular way is to employ pop-culture cheeky paper titles. In this groundbreaking work, we investigate the trend of cheeky titles with time and their correlations with author demographics. We also investigate how effective these cheeky titles are in garnering citations. We conclude by asking the future of ...err everything, aka AI, to rank what it thinks are the top 5 cheekiest titles. 
+Publications, and the ensuing citations, are currency for academics. As such, we try every possible ways to attract people to our papers admist the deluge of 60+ papers that appear on the arxiv each day. One popular way is to employ pop-culture cheeky paper titles. In this groundbreaking work, we investigate the trend of cheeky titles with time and their correlations with author demographics. We also investigate how effective these cheeky titles are in garnering citations. We conclude by asking the future of ...err everything, aka AI, to rank what it thinks are the top 5 cheekiest titles.
 
+=============
 1. define cheeky title
+- train ML models to classify these for us...?
+
 2. compile list of cheeky papers within the past 5+ years..?
 1. trend with time (easy)
 2. correlation with sex, age of authors, number of citation etc?
