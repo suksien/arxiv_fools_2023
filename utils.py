@@ -12,7 +12,7 @@ def query_ads():
                            "fl": "title, first_author, author, aff, citation_count, date",
                            "fq": "property:refereed",
                            "fq": "doctype: article",
-                           #"fq": "author_count: 20",
+                           "fq": "author_count: 16",
                            "fq": "database:astronomy",
                            "rows": 2000, # 2000 is the max
                            "sort": "date desc"})
