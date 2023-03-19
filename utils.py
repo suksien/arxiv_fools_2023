@@ -2,6 +2,8 @@ import requests
 from urllib.parse import urlencode, quote_plus
 import pandas as pd
 import string
+import glob
+import numpy as np
 
 def query_ads(year, journal,startmo=None, endmo=None):
     # https://github.com/adsabs/adsabs-dev-api
@@ -12,7 +14,7 @@ def query_ads(year, journal,startmo=None, endmo=None):
 
     if startmo is not None:
         encoded_query = urlencode({"q": "pubdate:[%s-%s TO %s-%s]" % (year,startmo,year,endmo),
-                                   "fl": "title, first_author, author, aff, citation_count, date",
+                                   "fl": "title, first_author, author, aff, citation_count, read_count, date",
                                    "fq": "property:refereed",
                                    "fq": "doctype: article",
                                    "fq": "author_count: 16",
@@ -24,7 +26,7 @@ def query_ads(year, journal,startmo=None, endmo=None):
 
     else:
         encoded_query = urlencode({"q": "year:%s" % (year),
-                                   "fl": "title, first_author, author, aff, citation_count, date",
+                                   "fl": "title, first_author, author, aff, citation_count, read_count, date",
                                    "fq": "property:refereed",
                                    "fq": "doctype: article",
                                    "fq": "author_count: 16",
@@ -46,7 +48,8 @@ def run_query_year(year_want):
 
     data_all = []
     ntot_all = 0
-    all_journals = ['ApJ', 'ApJS', 'ApL', 'MNRAS', 'AJ', 'A&A', 'A&ARv', 'JCos', 'JCAP']
+    all_journals = ['ApJ', 'ApJS', 'MNRAS', 'AJ', 'A&A', 'A&ARv', 'JCos', 'JCAP'] # "ApL"
+    print("====== year %d ======" % year_want)
     for journal in all_journals:
         print(journal)
         results, data, ntot = query_ads(year_want, journal)
@@ -70,30 +73,29 @@ def run_query_year(year_want):
     return data_all
 
 def filter_results(data):
-    #data = results['response']['docs']
+    if type(data) != pd.core.frame.DataFrame:
+        print("error: data needs to be in pandas dataframe format")
+        return 0
+
     out_index = []
-    for i, elem in enumerate(data):
-        title = elem['title'][0]
-        if ":" in title:
-            out_index.append(i)
+    #for i, elem in enumerate(data):
+    #    title = elem['title'][0]
+    for index, row in data.iterrows():
+        title = row['title']
+        if type(title) is str:
+            if ":" in title:
+                out_index.append(index)
 
     print("ncolon", len(out_index))
     return out_index
-    # data = np.array(data)
-    # subdata = list(data[ind])
-    # df = pd.DataFrame.from_dict(list(data[ind]))
-    # result = pd.concat([df1, df2])
 
-def old_run_query_year(year_want):
+def combine_outputs():
+    all_files = glob.glob('*.xlsx')
+    big_output = []
 
-    all_journals = ['ApJ', 'ApJS']#, 'ApL', 'MNRAS', 'AJ', 'A&A', 'A&ARv', 'JCos', 'JCAP']
-    for journal in all_journals:
-        print(journal)
-        results, ntot = query_ads(year_want, journal)
-        if ntot > 2000:
-            results, ntot = query_ads(year_want, journal, startmo=1, endmo=6)
-            results, ntot = query_ads(year_want, journal, startmo=7, endmo=12)
-        if ntot > 0:
-            ind = filter_results(results)
-        print()
+    for file in all_files:
+        data = pd.read_excel(file)
+        big_output.append(data)
 
+    df = pd.concat(big_output)
+    df.to_excel('master_output.xlsx')
