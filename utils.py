@@ -83,8 +83,11 @@ def filter_results(data):
     for index, row in data.iterrows():
         title = row['title']
         if type(title) is str:
-            if ":" in title:
-                out_index.append(index)
+            if "Correction to" in title or "Erratum" in title:
+                pass
+            else:
+                if ":" in title:
+                    out_index.append(index)
 
     print("ncolon", len(out_index))
     return out_index
