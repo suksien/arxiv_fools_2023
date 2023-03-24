@@ -78,6 +78,8 @@ def filter_results(data):
         return 0
 
     out_index = []
+    out_nocolon_index = []
+
     #for i, elem in enumerate(data):
     #    title = elem['title'][0]
     for index, row in data.iterrows():
@@ -88,9 +90,11 @@ def filter_results(data):
             else:
                 if ":" in title:
                     out_index.append(index)
+                else:
+                    out_nocolon_index.append(index)
 
     print("ncolon", len(out_index))
-    return out_index
+    return out_index, out_nocolon_index
 
 def combine_outputs():
     all_files = glob.glob('*.xlsx')

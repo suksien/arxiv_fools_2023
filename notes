@@ -26,3 +26,9 @@ Publications, and the ensuing citations, are currency for academics. As such, we
 0. Cheekiness ranking (0-5)
 1. Presence of colon in title vs. citation count and redshift (time)
 2. Cheekiness ranking vs. citation
+
+=============
+Analysis notes:
+
+1. Results from 2000 to 2023, resulting in 187659 papers.
+- after removing erratrum papers, 38544 papers with colon in titles
