@@ -30,5 +30,13 @@ Publications, and the ensuing citations, are currency for academics. As such, we
 =============
 Analysis notes:
 
-1. Results from 2000 to 2023, resulting in 187659 papers.
-- after removing erratrum papers, 38544 papers with colon in titles
+Pulled papers from 2000 to 2023, resulting in 187659 papers.
+
+1. Colon vs no colon:
+(a) after removing erratrum papers, 38544 papers with colon in titles, which is 20.5% of all papers
+(b) all population comparison tests indicate citation counts of papers with colon are significantly different
+that those with colon (higher citation with colon?!)
+
+2. Cheeky paper titles:
+(a) out of NN ranked papers from NN-NN, there are ? papers in each 1-5 groups
+(b) 
